@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Donation = require("../models/Donation");
 
-// @route   POST /api/donations
-// @desc    Add a new food donation
 router.post("/", async (req, res) => {
   try {
     const newDonation = new Donation(req.body);
@@ -14,8 +12,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// @route   GET /api/donations
-// @desc    Fetch all donations
 router.get("/donations", async (req, res) => {
   try {
     const donations = await Donation.find();
@@ -29,7 +25,6 @@ router.get("/stats", async (req, res) => {
   try {
     const donations = await Donation.find(); // Fetch all donation records
 
-    // Calculate statistics
     const totalMeals = donations.reduce((sum, donation) => sum + donation.minServings, 0);
     const totalWeight = donations.reduce((sum, donation) => sum + donation.numKGs, 0);
     const totalDishes = donations.reduce((sum, donation) => sum + donation.numDishes, 0);
